@@ -21,23 +21,15 @@ public class Tournament
         readMatches(filename);
         processMatches();
     }
-    
+
     private void processMatches()
     {
         try
         {
-            for(String match : matches)
+            for (String match : matches)
             {
                 String[] scores = match.split(", ");
-
-                if (scores.length == 2)
-                {
-                    judgeMatch(getTeamName(scores[0]),getTeamScore(scores[0]),getTeamName(scores[1]),getTeamScore(scores[1]));
-                }
-                else
-                {
-                    throw new Exception("Invalid input: match results should be seperated by a comma.");
-                }
+                judgeMatch(getTeamName(scores[0]), getTeamScore(scores[0]), getTeamName(scores[1]), getTeamScore(scores[1]));
             }
         }
         catch (Exception e)
@@ -48,43 +40,31 @@ public class Tournament
 
     private void judgeMatch(String teamOneName, int teamOneScore, String teamTwoName, int teamTwoScore)
     {
-            if (teamOneScore > teamTwoScore)
-            {
-                addToPoints(teamOneName, 3);
-                addToPoints(teamTwoName, 0);
-            }
-            else if (teamOneScore < teamTwoScore)
-            {
-                addToPoints(teamOneName, 0);
-                addToPoints(teamTwoName, 3);
-            }
-            else
-            {
-                addToPoints(teamOneName, 1);
-                addToPoints(teamTwoName, 1);
-            }
+        if (teamOneScore > teamTwoScore)
+        {
+            addToPoints(teamOneName, 3);
+            addToPoints(teamTwoName, 0);
+        }
+        else if (teamOneScore < teamTwoScore)
+        {
+            addToPoints(teamOneName, 0);
+            addToPoints(teamTwoName, 3);
+        }
+        else
+        {
+            addToPoints(teamOneName, 1);
+            addToPoints(teamTwoName, 1);
+        }
     }
 
     private String getTeamName(String teamResult) throws Exception
     {
-        String teamName = teamResult.substring(0, teamResult.lastIndexOf(" "));
-        if(teamName.length() == 0)
-        {
-            throw new Exception("Invalid input: team's name must have at least one character.");
-        }
-        return teamName;
+        return teamResult.substring(0, teamResult.lastIndexOf(" "));
     }
 
     private int getTeamScore(String teamResult) throws Exception
     {
-        try
-        {
-            return Integer.parseInt(teamResult.substring(teamResult.lastIndexOf(" ") + 1));
-        }
-        catch (Exception e)
-        {
-            throw new Exception("Invalid input: team's score cannot contain a non-numeric character.");
-        }
+        return Integer.parseInt(teamResult.substring(teamResult.lastIndexOf(" ") + 1));
     }
 
     //Adds points to team. If the team doesn't exist in teams HashMap then it is added to the Map.
@@ -122,7 +102,7 @@ public class Tournament
 
     public void printTeams()
     {
-        List<Entry<String, Integer>> teamsList = new LinkedList<Entry<String, Integer>>(teams.entrySet());
+        List<Entry<String, Integer>> teamsList = new LinkedList<>(teams.entrySet());
 
         Collections.sort(teamsList, new Comparator<Entry<String, Integer>>()
         {
@@ -150,11 +130,10 @@ public class Tournament
             System.out.println(i + ". " + team.getKey() + ", " + team.getValue() + " pts");
         }
     }
-    
+
     /*------------------------------------------------------------------------*/
-    /*                    Getters and setters                                 */
-    /*------------------------------------------------------------------------*/
-    
+ /*                    Getters and setters                                 */
+ /*------------------------------------------------------------------------*/
     public ArrayList<String> getMatches()
     {
         return matches;
