@@ -6,11 +6,10 @@ public class TournamentRankingSystem
 {
     public static void main(String []args)
     {
-        Tournament tournament = new Tournament();
-        
         if(args.length > 0)
         {
-            tournament.readMatches(args[0]);
+            Tournament tournament = new Tournament(args[0]);
+            tournament.printTeams();
         }else
         {
             System.out.println("Please enter the file path as the first argument");

@@ -3,6 +3,7 @@ package com.spandigital.rickyconntournamentrankingsystem;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -12,24 +13,29 @@ import java.util.Map.Entry;
 
 public class Tournament
 {
+    private ArrayList<String> matches = new ArrayList<>();
     private HashMap<String, Integer> teams = new HashMap<>();
 
-    public Tournament()
+    public Tournament(String filename) throws Exception
     {
+        readMatches(filename);
+        for(String match : matches)
+        {
+            String[] scores = match.split(",");
+
+            if (scores.length == 2)
+            {
+                judgeMatch(getTeamName(scores[0]),getTeamScore(scores[0]),getTeamName(scores[1]),getTeamScore(scores[1]));
+            }
+            else
+            {
+                throw new Exception("Exception message");
+            }
+        }
     }
 
-    public String judgeMatch(String match)
+    private void judgeMatch(String teamOneName, int teamOneScore, String teamTwoName, int teamTwoScore)
     {
-        String[] scores = match.split(",");
-
-        if (scores.length == 2)
-        {
-            String teamOneName = getTeamName(scores[0]);
-            int teamOneScore = getTeamScore(scores[0]);
-
-            String teamTwoName = getTeamName(scores[1]);
-            int teamTwoScore = getTeamScore(scores[1]);
-
             if (teamOneScore > teamTwoScore)
             {
                 addToPoints(teamOneName, 3);
@@ -45,27 +51,20 @@ public class Tournament
                 addToPoints(teamOneName, 1);
                 addToPoints(teamTwoName, 1);
             }
-
-            return "success";
-        }
-        else
-        {
-            return "invalid";
-        }
     }
 
-    public String getTeamName(String teamResult)
+    private String getTeamName(String teamResult)
     {
         return teamResult.substring(0, teamResult.lastIndexOf(" "));
     }
 
-    public int getTeamScore(String teamResult)
+    private int getTeamScore(String teamResult)
     {
         return Integer.parseInt(teamResult.substring(teamResult.lastIndexOf(" ") + 1));
     }
 
-    //Adds points to team. If the team doesn't exist in teams then adds the team.
-    public void addToPoints(String teamName, int points)
+    //Adds points to team. If the team doesn't exist in teams HashMap then it is added to the Map.
+    private void addToPoints(String teamName, int points)
     {
         if (teams.get(teamName) == null)
         {
@@ -77,7 +76,7 @@ public class Tournament
         }
     }
 
-    public void readMatches(String filename)
+    private void readMatches(String filename)
     {
         try
         {
@@ -87,11 +86,9 @@ public class Tournament
 
             while (match != null)
             {
-                judgeMatch(match);
+                matches.add(match);
                 match = reader.readLine();
             }
-
-            printTeams();
         }
         catch (Exception ex)
         {
@@ -129,5 +126,25 @@ public class Tournament
             Entry<String, Integer> team = teamsList.get(i - 1);
             System.out.println(i + ". " + team.getKey() + ", " + team.getValue() + " pts");
         }
+    }
+    
+    public ArrayList<String> getMatches()
+    {
+        return matches;
+    }
+
+    public void setMatches(ArrayList<String> matches)
+    {
+        this.matches = matches;
+    }
+
+    public HashMap<String, Integer> getTeams()
+    {
+        return teams;
+    }
+
+    public void setTeams(HashMap<String, Integer> teams)
+    {
+        this.teams = teams;
     }
 }
