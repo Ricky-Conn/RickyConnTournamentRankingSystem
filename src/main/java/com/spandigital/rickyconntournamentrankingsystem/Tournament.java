@@ -16,21 +16,33 @@ public class Tournament
     private ArrayList<String> matches = new ArrayList<>();
     private HashMap<String, Integer> teams = new HashMap<>();
 
-    public Tournament(String filename) throws Exception
+    public Tournament(String filename)
     {
         readMatches(filename);
-        for(String match : matches)
+        processMatches();
+    }
+    
+    private void processMatches()
+    {
+        try
         {
-            String[] scores = match.split(",");
+            for(String match : matches)
+            {
+                String[] scores = match.split(", ");
 
-            if (scores.length == 2)
-            {
-                judgeMatch(getTeamName(scores[0]),getTeamScore(scores[0]),getTeamName(scores[1]),getTeamScore(scores[1]));
+                if (scores.length == 2)
+                {
+                    judgeMatch(getTeamName(scores[0]),getTeamScore(scores[0]),getTeamName(scores[1]),getTeamScore(scores[1]));
+                }
+                else
+                {
+                    throw new Exception("Invalid input: match results should be seperated by a comma.");
+                }
             }
-            else
-            {
-                throw new Exception("Exception message");
-            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
         }
     }
 
@@ -127,6 +139,8 @@ public class Tournament
             System.out.println(i + ". " + team.getKey() + ", " + team.getValue() + " pts");
         }
     }
+    
+    //Getters and setters
     
     public ArrayList<String> getMatches()
     {
