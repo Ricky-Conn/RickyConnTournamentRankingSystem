@@ -70,9 +70,16 @@ public class Tournament
         return teamResult.substring(0, teamResult.lastIndexOf(" "));
     }
 
-    private int getTeamScore(String teamResult)
+    private int getTeamScore(String teamResult) throws Exception
     {
-        return Integer.parseInt(teamResult.substring(teamResult.lastIndexOf(" ") + 1));
+        try
+        {
+            return Integer.parseInt(teamResult.substring(teamResult.lastIndexOf(" ") + 1));
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Invalid input: team's score cannot contain a non-numeric character.");
+        }
     }
 
     //Adds points to team. If the team doesn't exist in teams HashMap then it is added to the Map.
@@ -124,7 +131,6 @@ public class Tournament
                 else if (o1.getValue() < o2.getValue())
                 {
                     return 1;
-
                 }
                 else
                 {
@@ -140,7 +146,9 @@ public class Tournament
         }
     }
     
-    //Getters and setters
+    /*------------------------------------------------------------------------*/
+    /*                    Getters and setters                                 */
+    /*------------------------------------------------------------------------*/
     
     public ArrayList<String> getMatches()
     {
