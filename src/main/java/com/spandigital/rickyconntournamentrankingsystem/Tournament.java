@@ -100,8 +100,9 @@ public class Tournament
         }
     }
 
-    public void printTeams()
+    public String getResults()
     {
+        String results = ""; 
         List<Entry<String, Integer>> teamsList = new LinkedList<>(teams.entrySet());
 
         Collections.sort(teamsList, new Comparator<Entry<String, Integer>>()
@@ -127,8 +128,13 @@ public class Tournament
         for (int i = 1; i <= teamsList.size(); i++)
         {
             Entry<String, Integer> team = teamsList.get(i - 1);
-            System.out.println(i + ". " + team.getKey() + ", " + team.getValue() + " pts");
+            results += i + ". " + team.getKey() + ", " + team.getValue() + " pts\n";
         }
+        if(results.contains("\n"))
+        {
+            results = results.substring(0, results.lastIndexOf("\n"));
+        }
+        return results;
     }
 
     /*------------------------------------------------------------------------*/

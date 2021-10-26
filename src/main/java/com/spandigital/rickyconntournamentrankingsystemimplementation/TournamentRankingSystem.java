@@ -9,7 +9,7 @@ public class TournamentRankingSystem
         if (args.length > 0)
         {
             Tournament tournament = new Tournament(args[0]);
-            tournament.printTeams();
+            System.out.println(tournament.getResults());
         }
         else
         {
