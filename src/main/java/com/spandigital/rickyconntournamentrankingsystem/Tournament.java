@@ -65,9 +65,14 @@ public class Tournament
             }
     }
 
-    private String getTeamName(String teamResult)
+    private String getTeamName(String teamResult) throws Exception
     {
-        return teamResult.substring(0, teamResult.lastIndexOf(" "));
+        String teamName = teamResult.substring(0, teamResult.lastIndexOf(" "));
+        if(teamName.length() == 0)
+        {
+            throw new Exception("Invalid input: team's name must have at least one character.");
+        }
+        return teamName;
     }
 
     private int getTeamScore(String teamResult) throws Exception
