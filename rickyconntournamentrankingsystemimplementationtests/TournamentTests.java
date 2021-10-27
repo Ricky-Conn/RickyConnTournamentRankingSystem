@@ -11,7 +11,7 @@ public class TournamentTests
 {
     private String testDirectory = "rickyconntournamentrankingsystemimplementationtests"+File.separator+"tests"+File.separator;
 
-    @Test
+    @Test //to see if ordering still works when all teams had the same points.
     public void alphabeticalOrderAllSamePointsTest()
     {
         Tournament tournament = new Tournament(testDirectory+"manySamePoints.txt");
@@ -19,28 +19,28 @@ public class TournamentTests
     }
     
     
-    @Test
+    @Test //to see if ordering still works when there's a mix of ties and wins i.e. not all with same points.
     public void orderNotAllSamePointsTest()
     {
         Tournament tournament = new Tournament(testDirectory+"alphabeticalOrderNotAllTies.txt");
         Assert.assertEquals(tournament.getResults(), readFileWithNewlines(testDirectory+"expectedAlphabeticalOrderNotAllTies.txt"));
     }
     
-    @Test
+    @Test //to see if points are calculated correctly and results ordered correctly when all different.
     public void allDifferentPoints()
     {
         Tournament tournament = new Tournament(testDirectory+"allDifferentPoints.txt");
         Assert.assertEquals(tournament.getResults(), readFileWithNewlines(testDirectory+"expectedAllDifferentPoints.txt"));
     }
     
-    @Test
+    @Test //input of one match.
     public void oneMatchTest()
     {
         Tournament tournament = new Tournament(testDirectory+"oneMatch.txt");
         Assert.assertEquals(tournament.getResults(), readFileWithNewlines(testDirectory+"expectedOneMatch.txt"));
     }
     
-    @Test
+    @Test //input of no matches.
     public void noMatchestest()
     {
         Tournament tournament = new Tournament(testDirectory+"noMatches.txt");

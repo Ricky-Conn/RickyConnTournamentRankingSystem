@@ -15,5 +15,5 @@ Setup Steps:
 1. cd into root of project i.e. the RickyConnTournamentRankingSystem directory
 2. compile using the following command: javac -cp . rickyconntournamentrankingsystemimplementation/TournamentRankingSystem.java
 3. run using the following command: java rickyconntournamentrankingsystemimplementation/TournamentRankingSystem rickyconntournamentrankingsystemimplementation/matches.txt
-4. compile test class using following command: javac -cp junit-jupiter-engine.jar:junit-jupiter-engine.jar:junit-4.12.jar:hamcrest-core-1.3.jar:. rickyconntournamentrankingsystemimplementationtests/TournamentTests.java
-5. java -cp junit-jupiter-engine.jar:junit-jupiter-engine.jar:junit-4.12.jar:hamcrest-core-1.3.jar:. org.junit.runner.JUnitCore rickyconntournamentrankingsystemimplementationtests.TournamentTests
+4. compile the test class using following command: javac -cp junit-jupiter-engine.jar:junit-jupiter-engine.jar:junit-4.12.jar:hamcrest-core-1.3.jar:. rickyconntournamentrankingsystemimplementationtests/TournamentTests.java
+5. run the tests using the following command: java -cp junit-jupiter-engine.jar:junit-jupiter-engine.jar:junit-4.12.jar:hamcrest-core-1.3.jar:. org.junit.runner.JUnitCore rickyconntournamentrankingsystemimplementationtests.TournamentTests
