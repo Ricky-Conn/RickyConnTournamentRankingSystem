@@ -1,4 +1,4 @@
-package com.spandigital.rickyconntournamentrankingsystem;
+package rickyconntournamentrankingsystem;
 
 import java.io.BufferedReader;
 import java.io.File;
