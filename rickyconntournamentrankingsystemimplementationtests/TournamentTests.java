@@ -15,7 +15,7 @@ public class TournamentTests
     public void alphabeticalOrderAllSamePointsTest()
     {
         Tournament tournament = new Tournament(testDirectory+"manySamePoints.txt");
-        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedManySamePoints.txt"));
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines(testDirectory+"expectedManySamePoints.txt"));
     }
     
     
@@ -23,28 +23,28 @@ public class TournamentTests
     public void orderNotAllSamePointsTest()
     {
         Tournament tournament = new Tournament(testDirectory+"alphabeticalOrderNotAllTies.txt");
-        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedAlphabeticalOrderNotAllTies.txt"));
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines(testDirectory+"expectedAlphabeticalOrderNotAllTies.txt"));
     }
     
     @Test
     public void allDifferentPoints()
     {
         Tournament tournament = new Tournament(testDirectory+"allDifferentPoints.txt");
-        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedAllDifferentPoints.txt"));
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines(testDirectory+"expectedAllDifferentPoints.txt"));
     }
     
     @Test
     public void oneMatchTest()
     {
         Tournament tournament = new Tournament(testDirectory+"oneMatch.txt");
-        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedOneMatch.txt"));
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines(testDirectory+"expectedOneMatch.txt"));
     }
     
     @Test
     public void noMatchestest()
     {
         Tournament tournament = new Tournament(testDirectory+"noMatches.txt");
-        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedNoMatches.txt"));
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines(testDirectory+"expectedNoMatches.txt"));
     }
     
     public String readFileWithNewlines(String filename)
