@@ -2,27 +2,51 @@ import com.spandigital.rickyconntournamentrankingsystem.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 
 public class TournamentTests
 {
     @Test
-    public void alphabeticalOrderTest()
+    @DisplayName("Testing to see if ordering still works when all teams had the same points.")
+    public void alphabeticalOrderAllSamePointsTest()
     {
-        Tournament tournament = new Tournament("manySamePoints.txt");
-        Assert.assertEquals(tournament.getResults(), "1. Ben, 1 pts\n2. FC Awesome, 1 pts\n3. Grouches, 1 pts\n4. Lions, 1 pts\n5. Snakes, 1 pts\n6. Tarantulas, 1 pts");
+        Tournament tournament = new Tournament("tests"+File.separator+"manySamePoints.txt");
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedManySamePoints.txt"));
     }
     
     
     @Test
-    public void alphabeticalOrderNotAllTiesTest()
+    @DisplayName("Testing to see if ordering still works when there's a mix of ties and wins i.e. not all with same points.")
+    public void orderNotAllSamePointsTest()
     {
-        System.out.println(readFileWithNewlines("expectedManySamePoints.txt"));
-        Tournament tournament = new Tournament("manySamePoints.txt");
-//        Assert.assertEquals(tournament.getResults(), "1. Ben, 1 pts\n2. FC Awesome, 1 pts\n3. Grouches, 1 pts\n4. Lions, 1 pts\n5. Snakes, 1 pts\n6. Tarantulas, 1 pts");
-        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("expectedManySamePoints.txt"));
+        Tournament tournament = new Tournament("tests"+File.separator+"alphabeticalOrderNotAllTies.txt");
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedAlphabeticalOrderNotAllTies.txt"));
+    }
+    
+    @Test
+    @DisplayName("Testing to see if points are calculated correctly and results ordered correctly when all different.")
+    public void allDifferentPoints()
+    {
+        Tournament tournament = new Tournament("tests"+File.separator+"allDifferentPoints.txt");
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedAllDifferentPoints.txt"));
+    }
+    
+    @Test
+    @DisplayName("Testing input of one match.")
+    public void oneMatchTest()
+    {
+        Tournament tournament = new Tournament("tests"+File.separator+"oneMatch.txt");
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedOneMatch.txt"));
+    }
+    
+    @Test
+    @DisplayName("Testing input of no matches.")
+    public void noMatchestest()
+    {
+        Tournament tournament = new Tournament("tests"+File.separator+"noMatches.txt");
+        Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedNoMatches.txt"));
     }
     
     public String readFileWithNewlines(String filename)
