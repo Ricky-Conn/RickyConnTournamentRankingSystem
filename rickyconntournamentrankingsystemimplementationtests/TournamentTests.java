@@ -9,10 +9,12 @@ import org.junit.Test;
 
 public class TournamentTests
 {
+    private String testDirectory = "rickyconntournamentrankingsystemimplementationtests"+File.separator+"tests"+File.separator;
+
     @Test
     public void alphabeticalOrderAllSamePointsTest()
     {
-        Tournament tournament = new Tournament("tests"+File.separator+"manySamePoints.txt");
+        Tournament tournament = new Tournament(testDirectory+"manySamePoints.txt");
         Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedManySamePoints.txt"));
     }
     
@@ -20,28 +22,28 @@ public class TournamentTests
     @Test
     public void orderNotAllSamePointsTest()
     {
-        Tournament tournament = new Tournament("tests"+File.separator+"alphabeticalOrderNotAllTies.txt");
+        Tournament tournament = new Tournament(testDirectory+"alphabeticalOrderNotAllTies.txt");
         Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedAlphabeticalOrderNotAllTies.txt"));
     }
     
     @Test
     public void allDifferentPoints()
     {
-        Tournament tournament = new Tournament("tests"+File.separator+"allDifferentPoints.txt");
+        Tournament tournament = new Tournament(testDirectory+"allDifferentPoints.txt");
         Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedAllDifferentPoints.txt"));
     }
     
     @Test
     public void oneMatchTest()
     {
-        Tournament tournament = new Tournament("tests"+File.separator+"oneMatch.txt");
+        Tournament tournament = new Tournament(testDirectory+"oneMatch.txt");
         Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedOneMatch.txt"));
     }
     
     @Test
     public void noMatchestest()
     {
-        Tournament tournament = new Tournament("tests"+File.separator+"noMatches.txt");
+        Tournament tournament = new Tournament(testDirectory+"noMatches.txt");
         Assert.assertEquals(tournament.getResults(), readFileWithNewlines("tests"+File.separator+"expectedNoMatches.txt"));
     }
     
@@ -50,8 +52,7 @@ public class TournamentTests
         StringBuilder expectedOutput = new StringBuilder();
         try
         {
-            String fullFilePath = System.getProperty("user.dir") + File.separator + filename;
-            BufferedReader reader = new BufferedReader(new FileReader(fullFilePath));
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
             String expectedMatch = reader.readLine();
 
             while (expectedMatch != null)
